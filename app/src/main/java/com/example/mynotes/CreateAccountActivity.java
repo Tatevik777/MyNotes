@@ -40,6 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         createAccountBtn.setOnClickListener(v-> createAccount());
         loginBtnTextView.setOnClickListener(v-> finish());
 
+
     }
 
     void createAccount(){
@@ -54,6 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         createAccountInFirebase(email,password);
 
+
     }
 
     void createAccountInFirebase(String email,String password){
@@ -65,22 +67,20 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         changeInProgress(false);
-
                         if(task.isSuccessful()){
                             //creating acc is done
-                            Toast.makeText(CreateAccountActivity.this,"Successfully created account. Check email to verify",
-                                    Toast.LENGTH_SHORT).show();
+                            Utility.showToast(CreateAccountActivity.this,"Successfully create account,Check email to verify");
                             firebaseAuth.getCurrentUser().sendEmailVerification();
                             firebaseAuth.signOut();
                             finish();
                         }else{
                             //failure
-                            Toast.makeText(CreateAccountActivity.this,task.getException().getLocalizedMessage(),
-                                    Toast.LENGTH_SHORT).show();
+                            Utility.showToast(CreateAccountActivity.this,task.getException().getLocalizedMessage());
                         }
                     }
                 }
         );
+
 
 
     }
@@ -112,5 +112,4 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
         return true;
     }
-
 }
