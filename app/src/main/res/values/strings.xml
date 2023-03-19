@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyNotes</string>
+    <string name="hello">Hello</string>
+    <string name="start">Let\'s get started</string>
 </resources>
